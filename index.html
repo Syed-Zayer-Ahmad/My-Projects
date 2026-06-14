@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Game Projects - Energy Duel & Element Duel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        header h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .hero h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Projects Section */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-card h3 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card .status {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card h4 {
+            color: #333;
+            margin: 1.5rem 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .project-card ul {
+            list-style-position: inside;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .project-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card .highlight {
+            background: #fff3cd;
+            padding: 1rem;
+            border-left: 4px solid #ffc107;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .project-card .highlight strong {
+            color: #856404;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        /* How to Run Section */
+        .how-to-run {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .how-to-run h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .how-to-run h3 {
+            color: #333;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .code-block {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            color: #333;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: #ffc107;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 2rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🎮 C Game Projects</h1>
+            <p>Interactive CLI games built with C</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>Welcome to My Game Projects</h2>
+            <p>
+                Explore two exciting turn-based battle games built entirely in C. 
+                These projects showcase game logic, user input handling, and strategic gameplay mechanics. 
+                Perfect for learning how to build interactive CLI applications!
+            </p>
+        </section>
+
+        <!-- Projects Grid -->
+        <section class="projects">
+            <!-- Project 1: Energy Duel -->
+            <div class="project-card">
+                <h3>⚡ Energy Duel</h3>
+                <span class="status">✓ Complete</span>
+
+                <h4>📖 Description</h4>
+                <p>
+                    A strategic two-player battle game where players manage energy points to execute powerful attacks. 
+                    The goal is to reduce your opponent's health to zero through smart tactical decisions.
+                </p>
+
+                <h4>🎮 Game Mechanics</h4>
+                <ul>
+                    <li><strong>Light Attack:</strong> Costs 1 EP, deals 10 damage</li>
+                    <li><strong>Heavy Attack:</strong> Costs 3 EP, deals 35 damage</li>
+                    <li><strong>Charge:</strong> Gains 2 energy points (free action)</li>
+                    <li>Both players start with 100 HP and 0 EP</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>💡 Strategy Tip:</strong> Balance between attacking and charging energy to set up powerful combos!
+                </div>
+
+                <h4>📁 File</h4>
+                <p><code>example_16.c</code></p>
+
+                <div class="btn-group">
+                    <a href="https://github.com/Syed-Zayer-Ahmad/My-Projects/blob/main/example_16.c" 
+                       class="btn btn-primary" target="_blank">View Source Code</a>
+                    <a href="#how-to-run" class="btn btn-secondary">How to Run</a>
+                </div>
+            </div>
+
+            <!-- Project 2: Element Duel -->
+            <div class="project-card">
+                <h3>🔥 Element Duel</h3>
+                <span class="status">✓ Complete</span>
+
+                <h4>📖 Description</h4>
+                <p>
+                    An advanced two-player strategy game featuring three elemental stances. 
+                    Read your opponent's moves and choose the winning stance to maximize damage and healing!
+                </p>
+
+                <h4>🎮 Game Mechanics</h4>
+                <ul>
+                    <li><strong>Fire Stance:</strong> High offensive damage</li>
+                    <li><strong>Water Stance:</strong> Healing and tactical defense</li>
+                    <li><strong>Earth Stance:</strong> Protective and resilient</li>
+                    <li>Dynamic damage scaling based on round progression</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>💡 Difficulty Levels:</strong> Rounds 1-3 (1x), Rounds 4-6 (1.5x), Rounds 7+ (2x - Sudden Death!)
+                </div>
+
+                <h4>📁 File</h4>
+                <p><code>example_17.c</code></p>
+
+                <div class="btn-group">
+                    <a href="https://github.com/Syed-Zayer-Ahmad/My-Projects/blob/main/example_17.c" 
+                       class="btn btn-primary" target="_blank">View Source Code</a>
+                    <a href="#how-to-run" class="btn btn-secondary">How to Run</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Run Section -->
+        <section class="how-to-run" id="how-to-run">
+            <h2>🚀 How to Run the Games</h2>
+
+            <h3>Prerequisites</h3>
+            <p>Make sure you have a C compiler installed (gcc, clang, or MSVC):</p>
+
+            <h3>1️⃣ Energy Duel</h3>
+            <div class="code-block">
+                <code>gcc example_16.c -o energy_duel<br>./energy_duel  (on Linux/Mac)<br>energy_duel.exe  (on Windows)</code>
+            </div>
+
+            <h3>2️⃣ Element Duel</h3>
+            <div class="code-block">
+                <code>gcc example_17.c -o element_duel<br>./element_duel  (on Linux/Mac)<br>element_duel.exe  (on Windows)</code>
+            </div>
+
+            <h3>📋 Steps</h3>
+            <ol style="margin-left: 2rem; color: #666;">
+                <li>Clone the repository</li>
+                <li>Navigate to the project directory</li>
+                <li>Compile the C file using gcc</li>
+                <li>Run the executable</li>
+                <li>Follow the in-game instructions to play!</li>
+            </ol>
+
+            <h3>💾 Clone Repository</h3>
+            <div class="code-block">
+                <code>git clone https://github.com/Syed-Zayer-Ahmad/My-Projects.git<br>cd My-Projects</code>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><strong>My C Game Projects Portfolio</strong></p>
+            <p>
+                📧 Email: <a href="mailto:your-email@example.com">your-email@example.com</a> | 
+                🔗 GitHub: <a href="https://github.com/Syed-Zayer-Ahmad" target="_blank">Syed-Zayer-Ahmad</a>
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                © 2026 Syed Zayer Ahmad. All rights reserved.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

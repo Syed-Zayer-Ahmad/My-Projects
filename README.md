@@ -1,4 +1,6 @@
-# My-Projects
+# My Projects
+
+Here is a list of my projects that I have done in C 
 
 [1. ELEMENT DUALS](https://github.com/Syed-Zayer-Ahmad/My-Projects/issues/1)
 
